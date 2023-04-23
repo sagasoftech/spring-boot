@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.config.CurrencyServiceConfiguration;
 
 @RestController
+@RequestMapping("/demo")
 public class CurrencyServiceController {
 
 	@Autowired

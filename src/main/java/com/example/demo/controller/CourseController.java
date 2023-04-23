@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Course;
 
 @RestController
+@RequestMapping("/demo")
 public class CourseController {
 
 	@RequestMapping("/courses")
