@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.restful.dao.UserDaoService;
+import com.example.demo.restful.exception.UserNotFoundException;
 import com.example.demo.restful.model.User;
 
 @RestController
@@ -33,7 +34,12 @@ public class UserResource {
 	
 	@GetMapping("/users/{id}")
 	public User findUser(@PathVariable int id) {
-		return service.findUser(id);
+		User user = service.findUser(id);
+		
+		if(user == null) {
+			throw new UserNotFoundException("id: "+ id);
+		}
+		return user;
 	}
 	
 	/*
