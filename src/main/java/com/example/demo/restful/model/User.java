@@ -1,12 +1,19 @@
 package com.example.demo.restful.model;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+import org.hibernate.validator.constraints.Length;
+
+import jakarta.validation.constraints.Past;
 
 public class User {
 	
 	private int id;
+	
+	@Length(min=2)
 	private String name;
+	
+	@Past
 	private LocalDate birthDate;
 	
 	public User(int id, String name, LocalDate birthDate) {

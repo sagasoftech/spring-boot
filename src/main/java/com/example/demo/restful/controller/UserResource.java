@@ -18,6 +18,8 @@ import com.example.demo.restful.dao.UserDaoService;
 import com.example.demo.restful.exception.UserNotFoundException;
 import com.example.demo.restful.model.User;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/restful")
 public class UserResource {
@@ -47,7 +49,7 @@ public class UserResource {
 	 * POST - Create a new resource
 	 */
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@RequestBody User user) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 		User savedUser = service.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 						.path("/{id}")
