@@ -1,15 +1,17 @@
 package com.example.demo.restful.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties("salary")
+//@JsonIgnoreProperties("salary")
+@JsonFilter("EmployeeDynamicFilter")
 public class Employee {
 
 	private int eid;
 	private String username;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	private String userpass;
 	
 	private double salary;
