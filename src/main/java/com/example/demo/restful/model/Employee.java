@@ -1,7 +1,9 @@
 package com.example.demo.restful.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties("salary")
 public class Employee {
 
 	private int eid;
