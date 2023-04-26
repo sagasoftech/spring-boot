@@ -1,5 +1,10 @@
 package com.example.demo.restful.controller;
 
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +16,9 @@ import com.example.demo.restful.model.HelloWorldBean;
 @RequestMapping("/restful")
 public class HelloWorldController {
 
+	@Autowired
+	private MessageSource messageSource;
+	
 	/*
 	 * Can replace RequestMapping with more specific method
 	 * 
@@ -30,5 +38,11 @@ public class HelloWorldController {
 	@GetMapping(path = "hello-bean-param/{name}")
 	public HelloWorldBean getPersonalMessage(@PathVariable String name) {
 		return new HelloWorldBean(String.format("Welcome to the world of Bean, %s", name));
+	}
+	
+	@GetMapping("/helloI18n")
+	public String helloInternationalization() {
+		Locale locale = LocaleContextHolder.getLocale();
+		return messageSource.getMessage("good.morning.message", null, "Default Message", locale);
 	}
 }
