@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.Past;
 
 public class User {
@@ -11,6 +14,7 @@ public class User {
 	private int id;
 	
 	@Length(min=2, message = "Name should have atleast two charactors")
+	@JsonProperty("user_name")
 	private String name;
 	
 	@Past(message = "Birth Date should be in past")

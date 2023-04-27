@@ -1,9 +1,14 @@
 package com.example.demo.restful.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,6 +69,21 @@ public class UserResource {
 	@DeleteMapping("/users/{id}")
 	public void deleteUserById(@PathVariable int id) {
 		service.deleteUserById(id);
+	}
+	
+	@GetMapping("/users/hatios/{id}")
+	public EntityModel<User> findUserHatios(@PathVariable int id) {
+		User user = service.findUser(id);
+		
+		if(user == null) {
+			throw new UserNotFoundException("id: "+ id);
+		}
+		
+		EntityModel<User> entityModel = EntityModel.of(user);
+		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).findAll());
+		entityModel.add(link.withRel("all-users"));
+		
+		return entityModel;
 	}
 	
 }
