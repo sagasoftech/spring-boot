@@ -17,6 +17,9 @@ public class BookJdbcCommandLineRunner implements CommandLineRunner{
 		repository.insert(new Book(3, "Kubernetes", "K8s Foundation"));
 		
 		repository.deleteById(2);
+		
+		System.out.println("Book: " + repository.findById(1));
+		System.out.println("Book: " + repository.findById(3));
 	}
 
 	
