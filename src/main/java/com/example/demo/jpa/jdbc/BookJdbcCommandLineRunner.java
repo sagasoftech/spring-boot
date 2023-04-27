@@ -12,8 +12,9 @@ public class BookJdbcCommandLineRunner implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		repository.insert();
-		
+		repository.insert(new Book(1, "Java", "Herbert Schildt"));
+		repository.insert(new Book(2, "Docker", "Docker Foundation"));
+		repository.insert(new Book(3, "Kubernetes", "K8s Foundation"));
 	}
 
 	

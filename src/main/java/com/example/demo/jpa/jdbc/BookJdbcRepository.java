@@ -13,10 +13,10 @@ public class BookJdbcRepository {
 	private static String INSERT_QUERY =
 			"""
 					INSERT INTO BOOK ( ID, NAME, AUTHOR)
-					VALUES(1, 'JAVA', 'Herbert Schildt');
+					VALUES(?, ?, ?);
 			""";
 	
-	public void insert() {
-		springJdbcTemplate.update(INSERT_QUERY);
+	public void insert(Book book) {
+		springJdbcTemplate.update(INSERT_QUERY, book.getId(), book.getName(), book.getAuthor());
 	}
 }
