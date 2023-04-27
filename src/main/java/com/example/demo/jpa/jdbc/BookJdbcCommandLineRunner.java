@@ -15,6 +15,8 @@ public class BookJdbcCommandLineRunner implements CommandLineRunner{
 		repository.insert(new Book(1, "Java", "Herbert Schildt"));
 		repository.insert(new Book(2, "Docker", "Docker Foundation"));
 		repository.insert(new Book(3, "Kubernetes", "K8s Foundation"));
+		
+		repository.deleteById(2);
 	}
 
 	

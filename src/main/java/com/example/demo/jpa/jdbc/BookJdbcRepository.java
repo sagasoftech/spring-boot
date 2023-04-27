@@ -16,7 +16,17 @@ public class BookJdbcRepository {
 					VALUES(?, ?, ?);
 			""";
 	
+	private static String DELETE_QUERY =
+			"""
+					DELETE FROM BOOK
+					WHERE ID = ?;
+			""";
+	
 	public void insert(Book book) {
 		springJdbcTemplate.update(INSERT_QUERY, book.getId(), book.getName(), book.getAuthor());
+	}
+	
+	public void deleteById(int id) {
+		springJdbcTemplate.update(DELETE_QUERY, id);
 	}
 }
