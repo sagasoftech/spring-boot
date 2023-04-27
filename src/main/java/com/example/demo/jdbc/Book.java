@@ -1,4 +1,4 @@
-package com.example.demo.jpa.jdbc;
+package com.example.demo.jdbc;
 
 public class Book {
 	

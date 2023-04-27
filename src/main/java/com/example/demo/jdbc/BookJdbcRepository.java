@@ -1,4 +1,4 @@
-package com.example.demo.jpa.jdbc;
+package com.example.demo.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
