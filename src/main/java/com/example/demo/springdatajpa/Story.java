@@ -45,5 +45,10 @@ public class Story {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+	@Override
+	public String toString() {
+		return "Story [id=" + id + ", name=" + name + ", author=" + author + "]";
+	}
 	
 }
