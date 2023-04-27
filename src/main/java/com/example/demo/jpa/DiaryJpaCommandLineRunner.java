@@ -18,8 +18,8 @@ public class DiaryJpaCommandLineRunner implements CommandLineRunner{
 		
 		repository.deleteById(2);
 		
-		System.out.println("Book: " + repository.findById(1));
-		System.out.println("Book: " + repository.findById(3));
+		System.out.println("Diary: " + repository.findById(1));
+		System.out.println("Diary: " + repository.findById(3));
 	}
 
 	
