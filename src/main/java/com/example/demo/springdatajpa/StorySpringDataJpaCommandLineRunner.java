@@ -23,6 +23,9 @@ public class StorySpringDataJpaCommandLineRunner implements CommandLineRunner{
 		
 		System.out.println("All Diary" + repository.findAll());
 		System.out.println("Count of Diaries: " + repository.count());
+		
+		System.out.println("Diaries with author Herbert: " + repository.findByAuthor("Herbert Schildt"));
+		
 	}
 
 	
