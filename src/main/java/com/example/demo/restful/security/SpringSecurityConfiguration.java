@@ -10,6 +10,13 @@ public class SpringSecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+		
+		//1. All request should be authenticated
+		http.authorizeHttpRequests(
+				auth -> auth.anyRequest().authenticated()
+				);
+		
+		
 		return http.build();
 	}
 }
