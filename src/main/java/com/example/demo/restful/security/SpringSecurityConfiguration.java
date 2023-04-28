@@ -21,6 +21,9 @@ public class SpringSecurityConfiguration {
 		//2. If request is not authenticated, a web page will be shown
 		http.httpBasic(withDefaults());
 		
+		//3. Disable CSRF - so that POST, PUT will work
+		http.csrf().disable();
+		
 		return http.build();
 	}
 }
