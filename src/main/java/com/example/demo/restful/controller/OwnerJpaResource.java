@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.restful.exception.UserNotFoundException;
 import com.example.demo.restful.model.Owner;
-import com.example.demo.restful.model.User;
+import com.example.demo.restful.model.Shop;
 import com.example.demo.restful.repository.OwnerRepository;
 
 import jakarta.validation.Valid;
@@ -57,5 +57,16 @@ public class OwnerJpaResource {
 						.buildAndExpand(savedOwner.getId())
 						.toUri();
 		return ResponseEntity.created(location ).build();
+	}
+	
+	@GetMapping("/owner-jpa/{id}/shops")
+	public List<Shop> getShopsByOwnerId(@PathVariable Long id) {
+		Optional<Owner> owner = repository.findById(id);
+		
+		if(owner.isEmpty()) {
+			throw new UserNotFoundException("id: "+ id);
+		}
+		
+		return owner.get().getShops();
 	}
 }

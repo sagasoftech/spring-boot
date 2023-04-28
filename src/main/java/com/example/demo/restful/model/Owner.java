@@ -60,6 +60,14 @@ public class Owner {
 		this.birthDate = birthDate;
 	}
 	
+	public List<Shop> getShops() {
+		return shops;
+	}
+
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
+	
 	@Override
 	public String toString() {
 		return "Owner [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
