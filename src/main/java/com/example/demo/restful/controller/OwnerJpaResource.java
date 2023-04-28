@@ -19,6 +19,7 @@ import com.example.demo.restful.exception.UserNotFoundException;
 import com.example.demo.restful.model.Owner;
 import com.example.demo.restful.model.Shop;
 import com.example.demo.restful.repository.OwnerRepository;
+import com.example.demo.restful.repository.ShopRepository;
 
 import jakarta.validation.Valid;
 
@@ -28,6 +29,9 @@ public class OwnerJpaResource {
 
 	@Autowired
 	private OwnerRepository repository;
+	
+	@Autowired
+	private ShopRepository shopRepository;
 
 	@GetMapping("/owner-jpa")
 	public List<Owner> findAll(){
@@ -35,7 +39,7 @@ public class OwnerJpaResource {
 	}
 	
 	@GetMapping("/owner-jpa/{id}")
-	public Optional<Owner> findOwner(@PathVariable Long id) {
+	public Optional<Owner> findOwner(@PathVariable Integer id) {
 		Optional<Owner> owner = repository.findById(id);
 		
 		if(owner.isEmpty()) {
@@ -45,7 +49,7 @@ public class OwnerJpaResource {
 	}
 	
 	@DeleteMapping("/owner-jpa/{id}")
-	public void deleteOwnerById(@PathVariable Long id) {
+	public void deleteOwnerById(@PathVariable Integer id) {
 		repository.deleteById(id);
 	}
 	
@@ -60,7 +64,7 @@ public class OwnerJpaResource {
 	}
 	
 	@GetMapping("/owner-jpa/{id}/shops")
-	public List<Shop> getShopsByOwnerId(@PathVariable Long id) {
+	public List<Shop> getShopsByOwnerId(@PathVariable Integer id) {
 		Optional<Owner> owner = repository.findById(id);
 		
 		if(owner.isEmpty()) {
@@ -68,5 +72,23 @@ public class OwnerJpaResource {
 		}
 		
 		return owner.get().getShops();
+	}
+	
+	@PostMapping("/owner-jpa/{id}/shops")
+	public ResponseEntity<Shop> addShopsforOwner(@PathVariable Integer id, @Valid @RequestBody Shop shop) {
+		Optional<Owner> owner = repository.findById(id);
+		
+		if(owner.isEmpty()) {
+			throw new UserNotFoundException("id: "+ id);
+		}
+		
+		shop.setOwner(owner.get());
+		
+		Shop addedShop = shopRepository.save(shop);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+						.path("/{id}")
+						.buildAndExpand(addedShop.getId())
+						.toUri();
+		return ResponseEntity.created(location).build();
 	}
 }

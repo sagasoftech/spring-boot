@@ -47,6 +47,14 @@ public class Shop {
 		this.shopName = shopName;
 	}
 
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
 	@Override
 	public String toString() {
 		return "Shop [id=" + id + ", shopName=" + shopName + "]";
