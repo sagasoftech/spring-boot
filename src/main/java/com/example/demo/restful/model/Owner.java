@@ -24,6 +24,10 @@ public class Owner {
 	@Past(message = "Birth Date should be in past")
 	private LocalDate birthDate;
 	
+	public Owner() {
+		super();
+	}
+
 	public Owner(int id, String name, LocalDate birthDate) {
 		super();
 		this.id = id;
