@@ -1,5 +1,7 @@
 package com.example.demo.restful.security;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,8 @@ public class SpringSecurityConfiguration {
 				auth -> auth.anyRequest().authenticated()
 				);
 		
+		//2. If request is not authenticated, a web page will be shown
+		http.httpBasic(withDefaults());
 		
 		return http.build();
 	}
