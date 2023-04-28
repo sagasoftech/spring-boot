@@ -1,14 +1,16 @@
 package com.example.demo.restful.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Past;
 
 @Entity
@@ -23,6 +25,10 @@ public class Owner {
 	
 	@Past(message = "Birth Date should be in past")
 	private LocalDate birthDate;
+	
+	@OneToMany(mappedBy = "owner")
+	@JsonIgnore
+	private List<Shop> shops;
 	
 	public Owner() {
 		super();
